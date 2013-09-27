@@ -48,14 +48,19 @@ class ImapLibrary(object):
                 time.sleep(10)
         raise AssertionError("No mail received within time")
 
-    def get_links_from_email(self, mailNumber):
+    def get_links_from_email(self, mailNumber, textOnly=False):
         '''
         Finds all links in an email body and returns them
 
         `mailNumber` is the index number of the mail to open
+
+        `textOnly` to use if the mail is in text format
         '''
         body = self.get_email_body(mailNumber)
-        return re.findall(r'href=[\'"]?([^\'" >]+)', body)
+        if not textOnly:
+            return re.findall(r'href=[\'"]?([^\'" >]+)', body)
+        else:
+            return re.findall('(https?://\\S+)', body)
 
     def open_link_from_mail(self, mailNumber, linkNumber=0):
         """

@@ -51,6 +51,7 @@ These keyword actions are available::
 
         Arguments:
             - mailNumber: is the index number of the mail to open
+            - textOnly: to use if mail is in text format
 
     Open Link from Mail:
         Find a link in an email body and open the link. Returns the links' html.
